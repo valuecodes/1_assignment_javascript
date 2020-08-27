@@ -3,82 +3,79 @@ function startScript() {
   console.log("Hello World");
 
   // Task 8
-  document.body.style.backgroundImage = 'url("img/bg.jpg")';
-  document.body.style.height = "100vh";
-  document.body.style.backgroundSize = "cover";
+  addBackgroundImage();
 
-  let div = document.createElement("div");
-  div.id = "tile-wrapper";
-  document.body.appendChild(div);
-
-  let tileWrapper = document.getElementById("tile-wrapper").style;
-  tileWrapper.top = "50%";
-  tileWrapper.width = "100%";
-  tileWrapper.textAlign = "center";
-  tileWrapper.fontFamily = "impact";
-  tileWrapper.position = "absolute";
-  tileWrapper.textTransform = "uppercase";
-
-  let title = document.createElement("h1");
-  title.innerText = "Work under progress...";
-  title.style.width = "fit-content";
-  title.style.margin = "auto";
-  title.style.background = "black";
-  title.style.color = "white";
-
-  document.getElementById("tile-wrapper").appendChild(title);
+  let tileWrapper = createTileWrapper();
+  let title = createTitle();
+  tileWrapper.appendChild(title);
 
   // Task 9
-  let ul = document.createElement("ul");
+  let ul = createUlElement();
 
-  let li1 = document.createElement("li");
-  let a1 = document.createElement("a");
-  a1.id = "home";
-  a1.className = "btn";
-  a1.href = "#default.asp";
-  a1.innerText = "Home";
-  li1.appendChild(a1);
-  ul.appendChild(li1);
-
-  let li2 = document.createElement("li");
-  let a2 = document.createElement("a");
-  a2.id = "news";
-  a2.className = "btn";
-  a2.href = "#news.asp";
-  a2.innerText = "News";
-  li2.appendChild(a2);
-  ul.appendChild(li2);
-
-  let li3 = document.createElement("li");
-  let a3 = document.createElement("a");
-  a3.id = "contact";
-  a3.className = "btn";
-  a3.href = "#contact.asp";
-  a3.innerText = "Contact";
-  li3.appendChild(a3);
-  ul.appendChild(li3);
-
-  let li4 = document.createElement("li");
-  li4.addEventListener("click", loadAbout);
-  let a4 = document.createElement("a");
-  a4.id = "about";
-  a4.className = "btn";
-  a4.href = "#about.asp";
-  a4.innerText = "About";
-  li4.appendChild(a4);
-  ul.appendChild(li4);
+  ul.appendChild(createLiElement("home"));
+  ul.appendChild(createLiElement("news"));
+  ul.appendChild(createLiElement("contact"));
+  ul.appendChild(createLiElement("about")).addEventListener("click", loadAbout);
 
   document.body.appendChild(ul);
-
-  let content = document.createElement("div");
-  content.id = "content";
-  document.body.appendChild(content);
+  createContent();
 }
 
 function loadAbout() {
   let content = document.getElementById("content");
   content.innerText = "Welcome visitor";
   document.getElementById("tile-wrapper").style.visibility = "hidden";
+}
+
+function addBackgroundImage() {
+  document.body.style.backgroundImage = 'url("img/bg.jpg")';
+  document.body.style.height = "100vh";
+  document.body.style.backgroundSize = "cover";
+}
+
+function createTileWrapper() {
+  let tileWrapper = document.createElement("div");
+  tileWrapper.id = "tile-wrapper";
+  document.body.appendChild(tileWrapper);
+  tileWrapper.style.top = "50%";
+  tileWrapper.style.width = "100%";
+  tileWrapper.style.textAlign = "center";
+  tileWrapper.style.fontFamily = "impact";
+  tileWrapper.style.position = "absolute";
+  tileWrapper.style.textTransform = "uppercase";
+  return tileWrapper;
+}
+
+function createTitle() {
+  let title = document.createElement("h1");
+  title.innerText = "Work under progress...";
+  title.style.width = "fit-content";
+  title.style.margin = "auto";
+  title.style.background = "black";
+  title.style.color = "white";
+  return title;
+}
+
+function createUlElement() {
+  return document.createElement("ul");
+}
+
+function createLiElement(name) {
+  let li = document.createElement("li");
+  let a = document.createElement("a");
+  a.id = name;
+  a.className = "btn";
+  a.href = "#" + name + ".asp";
+  a.innerText = name;
+  a.style.textTransform = "capitalize";
+  li.appendChild(a);
+  return li;
+}
+
+function createContent() {
+  let content = document.createElement("div");
+  content.id = "content";
+  document.body.appendChild(content);
 }
 
 document.addEventListener("DOMContentLoaded", startScript);
